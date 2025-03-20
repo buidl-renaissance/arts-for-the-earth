@@ -1,102 +1,37 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen p-6 sm:p-8 md:p-20 gap-6 sm:gap-8 font-[family-name:var(--font-geist-sans)] bg-gradient-to-b from-green-50 to-blue-50">
+      <header className="text-center max-w-4xl mx-auto">
+        <h1 className="text-5xl font-bold text-[#4A4433] mb-2 font-[family-name:var(--font-cambria)]">ARTS FOR THE EARTH</h1>
+        <h2 className="text-lg font-semibold text-[#5D5A44] font-[family-name:var(--font-cambria)]">BURG INK PRODUCTION</h2>
+      </header>
+      
+      <main className="max-w-3xl mx-auto text-center">
+        <p className="mb-4 sm:mb-6 text-base sm:text-lg text-gray-800 font-[family-name:var(--font-cambria)] leading-relaxed">
+          Life is a <span className="text-green-800 font-semibold">precious gift</span>, and our source of endless beauty, abundance, and diversity is all created from our <span className="italic text-green-700">Mother Earth</span>.
+        </p>
+        <p className="mb-4 sm:mb-6 text-base sm:text-lg text-gray-800 font-[family-name:var(--font-cambria)] leading-relaxed">
+          As a community, we have the <span className="text-blue-700 font-semibold">power to come together</span> in celebration, expressing gratitude, sharing creativity, and deepening our connection to the Earth and one another.
+        </p>
+        <p className="mb-4 sm:mb-6 text-base sm:text-lg text-gray-800 font-[family-name:var(--font-cambria)] leading-relaxed">
+          This gathering is a <span className="text-amber-700 font-semibold">heartfelt offering</span>, a space to experience the joy of creation, strengthen our bonds, and support organizations dedicated to protecting and restoring the planet.
+        </p>
+        <p className="mb-4 sm:mb-6 text-base sm:text-lg text-gray-800 font-[family-name:var(--font-cambria)] leading-relaxed">
+          Through <span className="text-purple-700">art</span>, <span className="text-indigo-600">music</span>, and <span className="text-teal-600">collective energy</span>, we uplift and inspire, fostering a deeper commitment to the well-being of our world for generations to come.
+        </p>
+        <p className="mb-6 sm:mb-8 text-base sm:text-lg text-gray-800 font-[family-name:var(--font-cambria)] leading-relaxed">
+          Let&apos;s dance, create, and celebrate the <span className="italic font-semibold text-green-800">magic of being alive together</span>.
+        </p>
+        <p className="mt-8 sm:mt-10 text-lg sm:text-xl font-bold text-green-800 border-t-2 border-green-200 pt-4 sm:pt-6 font-[family-name:var(--font-cambria)]">
+          Our planet needs us to <span className="text-red-600">Share Love!</span> By protecting our <span className="text-blue-600">waters</span> and being <span className="text-amber-700">Guardians of the land</span>, we are protecting the source of <span className="uppercase tracking-wide">All life</span>.
+        </p>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      
+      <footer className="text-center text-xs sm:text-sm text-gray-700 mt-4">
+        <p>Join us in celebrating and protecting our Earth</p>
+        <button className="mt-4 px-8 py-3 bg-[#5C5C3D] hover:bg-[#4A4433] text-white rounded-md font-bold text-lg tracking-wide transition-colors duration-300 shadow-lg border-2 border-[#A0A080] font-[family-name:var(--font-cambria)] uppercase">
+          Buy Tickets
+        </button>
       </footer>
     </div>
   );
