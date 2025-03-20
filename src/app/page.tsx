@@ -149,7 +149,7 @@ export default function Home() {
               </div>
               
               <div className="bg-green-100 p-4 rounded-md">
-                <h6 className="font-bold mb-1">Women's Healing & Empowerment - Divine Feminine Print</h6>
+                <h6 className="font-bold mb-1">Women&apos;s Healing & Empowerment - Divine Feminine Print</h6>
                 <p className="text-sm">• <span className="font-semibold">Sanctum House</span> – A sanctuary for survivors of sex trafficking, providing safety, healing, and support for rebuilding their lives.</p>
               </div>
               
