@@ -53,7 +53,7 @@ const Header = styled.header`
   position: relative;
   z-index: 2;
   padding: 0.5rem;
-  padding-top: 20rem;
+  padding-top: 17rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
