@@ -4,34 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-
-// Mock data for different collectible coins
-const mockCoins = {
-  "earth-day": {
-    id: "earth-day",
-    title: "Earth Day Digital Coin",
-    description: "Collect this special digital coin to commemorate Earth Day Detroit",
-    image: "/arts-for-earth-blank.png",
-  },
-  "animal-welfare": {
-    id: "animal-welfare",
-    title: "Animal Welfare Coin",
-    description: "A special coin supporting animal welfare and ecosystem protection initiatives",
-    image: "/arts-for-earth-blank.png", // Replace with actual image
-  },
-  "women-empowerment": {
-    id: "women-empowerment",
-    title: "Women's Empowerment Coin",
-    description: "Commemorating women's healing and empowerment initiatives",
-    image: "/arts-for-earth-blank.png", // Replace with actual image
-  },
-  "bipoc-support": {
-    id: "bipoc-support",
-    title: "BIPOC Community Support Coin",
-    description: "Supporting resources for BIPOC communities in Detroit",
-    image: "/arts-for-earth-blank.png", // Replace with actual image
-  },
-};
+import { mockCoins } from "@/mockCoins";
 
 type CoinData = {
   id: string;
@@ -50,6 +23,7 @@ const CollectPage = ({ coinData }: CollectPageProps) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [isFadedOut, setIsFadedOut] = useState(true);
   const [isGlowing, setIsGlowing] = useState(false);
+  
 
   useEffect(() => {
     // Check if this coin was already collected in localStorage
