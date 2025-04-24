@@ -70,7 +70,7 @@ const Header = styled.header`
 
   @media (min-width: 640px) {
     padding: 1rem;
-    padding-top: 10rem;
+    padding-top: 8rem;
     padding-bottom: 0;
 
     p {
