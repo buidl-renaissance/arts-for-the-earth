@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Head from "next/head";
 import Image from "next/image";
+import Collectables from "@/components/Collectables";
 
 const CollectPage = () => {
   const [isCollected, setIsCollected] = useState(false);
@@ -11,10 +12,10 @@ const CollectPage = () => {
 
   const handleCollect = () => {
     if (isCollected) return;
-    
+
     setIsSpinning(true);
     setIsFadedOut(false);
-    
+
     // Spin for 3 seconds before showing collected state
     setTimeout(() => {
       setIsSpinning(false);
@@ -26,10 +27,10 @@ const CollectPage = () => {
   return (
     <Container>
       <Head>
-        <title>Collect Earth Day Coin | Earth Day Detroit</title>
+        <title>Collect Art For The Earth Coin | Celebrate Earth Detroit</title>
         <meta
           name="description"
-          content="Collect your digital Earth Day coin to commemorate Earth Day Detroit"
+          content="Collect your digital Art for the Earth coin to commemorate Earth Day Detroit"
         />
       </Head>
 
@@ -37,24 +38,24 @@ const CollectPage = () => {
 
       <Content>
         <Header>
-          <MainTitle>Earth Day Digital Coin</MainTitle>
+          <MainTitle>Art For The Earth Coin</MainTitle>
           <p>
-            Collect this special digital coin to commemorate Earth Day Detroit
+            Collect this special digital coin to commemorate Arts For The Earth Detroit
           </p>
         </Header>
 
         <CoinContainer onClick={handleCollect} interactive={!isCollected}>
-          <CoinWrapper 
-            spinning={isSpinning} 
-            collected={isCollected} 
+          <CoinWrapper
+            spinning={isSpinning}
+            collected={isCollected}
             fadedOut={isFadedOut}
             glowing={isGlowing}
           >
             <Image
               src="/arts-for-earth-blank.png"
               alt="Earth Day Digital Coin"
-              width={250}
-              height={250}
+              width={200}
+              height={200}
               className="coin-image"
             />
           </CoinWrapper>
@@ -70,6 +71,8 @@ const CollectPage = () => {
             <CollectPrompt>Tap the coin to collect</CollectPrompt>
           )}
         </CollectionStatus>
+
+        <Collectables />
       </Content>
     </Container>
   );
@@ -169,8 +172,8 @@ const MainTitle = styled.h1`
 
 const CoinContainer = styled.div<{ interactive: boolean }>`
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,13 +185,13 @@ const CoinContainer = styled.div<{ interactive: boolean }>`
   }
 
   @media (min-width: 640px) {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
   }
 `;
 
-const CoinWrapper = styled.div<{ 
-  spinning: boolean; 
+const CoinWrapper = styled.div<{
+  spinning: boolean;
   collected: boolean;
   fadedOut: boolean;
   glowing: boolean;
@@ -212,7 +215,10 @@ const CoinWrapper = styled.div<{
   .coin-image {
     border-radius: 50%;
     object-fit: contain;
-    filter: drop-shadow(0 0 ${props => props.glowing ? '20px' : '10px'} rgba(150, 230, 161, ${props => props.glowing ? '0.8' : '0.5'}));
+    filter: drop-shadow(
+      0 0 ${(props) => (props.glowing ? "20px" : "10px")}
+        rgba(150, 230, 161, ${(props) => (props.glowing ? "0.8" : "0.5")})
+    );
     border-color: #a7f3d0;
     border-width: 7px;
     border-radius: 50%;
@@ -251,14 +257,15 @@ const GlowEffect = styled.div<{ active: boolean }>`
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(150, 230, 161, ${props => props.active ? '0.6' : '0.1'}) 0%,
+    rgba(150, 230, 161, ${(props) => (props.active ? "0.6" : "0.1")}) 0%,
     rgba(150, 230, 161, 0) 70%
   );
   filter: blur(15px);
   z-index: -1;
-  opacity: ${props => props.active ? 1 : 0};
+  opacity: ${(props) => (props.active ? 1 : 0)};
   transition: opacity 0.5s ease, background 0.5s ease;
-  animation: ${props => props.active ? 'enhancedPulse 3s infinite ease-in-out' : 'none'};
+  animation: ${(props) =>
+    props.active ? "enhancedPulse 3s infinite ease-in-out" : "none"};
 
   @keyframes pulse {
     0%,
@@ -271,7 +278,7 @@ const GlowEffect = styled.div<{ active: boolean }>`
       transform: translate(-50%, -50%) scale(1.1);
     }
   }
-  
+
   @keyframes enhancedPulse {
     0%,
     100% {
