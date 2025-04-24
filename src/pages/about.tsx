@@ -458,21 +458,19 @@ export default function Home() {
           <SubsectionTitle className="text-center">Fundraising Beneficiaries – Giving Back to Our Planet & Community</SubsectionTitle>
 
           <BeneficiarySection>
-            <BeneficiaryTitle>Water Protection & Conservation - 80%</BeneficiaryTitle>
+            <BeneficiaryTitle>Water Protection & Conservation</BeneficiaryTitle>
             <List>
               <li>
                 <BoldText>Water Protectors Network</BoldText> – Advocating for clean water, Indigenous water rights, and environmental justice.{' '}
-                <GreenText>60%</GreenText>
               </li>
               <li>
                 <BoldText>Friends of the Rouge</BoldText> – Dedicated to restoring, protecting, and enhancing the Rouge River watershed, engaging the community in conservation efforts.{' '}
-                <GreenText>20%</GreenText>
               </li>
             </List>
           </BeneficiarySection>
 
           <BeneficiarySection>
-            <BeneficiaryTitle>Tree Planting & Conservation - Tree Print - 20%</BeneficiaryTitle>
+            <BeneficiaryTitle>Tree Planting & Conservation - Tree Print</BeneficiaryTitle>
             <List>
               <li>
                 <BoldText>Greening of Detroit</BoldText> – Focused on planting trees, educating communities, and providing hands-on opportunities for people to contribute to a greener city.
