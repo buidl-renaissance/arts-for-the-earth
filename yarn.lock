@@ -898,10 +898,10 @@ braces@^3.0.3:
   dependencies:
     fill-range "^7.1.1"
 
-buidl-ticketing@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/buidl-ticketing/-/buidl-ticketing-0.0.2.tgz#d6d7d802c126f3a5cb095644c9c24b0d9016f392"
-  integrity sha512-qtvVrXrIX2BWcRTioajYsdqDcJeErevpUPflmU+ZrScfoQcOQn758cl+KEWkc+koJvIJScb+Y5HYQFK10a7d2A==
+buidl-ticketing@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/buidl-ticketing/-/buidl-ticketing-0.0.3.tgz#dbc82bf00c3d0de500106be83d73b4ed7fcc6258"
+  integrity sha512-Qk+IDdnUzKPr9QaJsbb+iTdYNIOOR8QdRHyyHlFfEpYoObqIf9Q5cyrup1TQMU+OoTsDWatvMO0bzZbAmvujRA==
   dependencies:
     tslib "^2.3.0"
 
