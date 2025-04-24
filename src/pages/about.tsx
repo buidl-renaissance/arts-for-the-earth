@@ -478,6 +478,80 @@ export default function Home() {
             </List>
           </BeneficiarySection>
 
+          <BeneficiarySection>
+            <BeneficiaryTitle>Youth & Family Activities</BeneficiaryTitle>
+            <List>
+              <li>
+                <BoldText>Temporary Tattoos</BoldText> – A fun way to showcase artwork on our skin without the needles or pain.
+              </li>
+              <li>
+                <BoldText>Community Coloring Book</BoldText> – Featuring artwork from participating artists, encouraging creativity and sharing insight relating to nature.
+              </li>
+              <li>
+                <BoldText>Environmental Education</BoldText> – Interactive displays and information on how to keep the planet clean.
+              </li>
+              <li>
+                <BoldText>Sidewalk Chalk Art</BoldText> – Open space for kids to decorate the parking lot with colorful art.
+              </li>
+              <li>
+                <BoldText>Bubbles & More</BoldText> – Bubbles, bucket of balls, canvas hung on fence for finger painting, and other activities.
+              </li>
+            </List>
+          </BeneficiarySection>
+
+          <BeneficiarySection>
+            <BeneficiaryTitle>Community Networking Board</BeneficiaryTitle>
+            <BoldText>Resources & Opportunities for Engagement</BoldText>
+            <List>
+              <li>
+                <BoldText>Detroit Cleanups</BoldText> – Information on cleanup events at Belle Isle and throughout the city.
+              </li>
+              <li>
+                <BoldText>Community Gardens & Volunteering</BoldText> – Ways to support local gardens and urban farming initiatives.
+              </li>
+              <li>
+                <BoldText>Youth Leadership & Guardianship</BoldText> – Opportunities for young people to engage in environmental activism and leadership roles.
+              </li>
+              <li>
+                <BoldText>BIPOC Community Support</BoldText> – Resources for housing, food assistance, soup kitchens, and homelessness support.
+              </li>
+              <li>
+                <BoldText>Disability Resources</BoldText> – Information on the Disability Act and organizations that provide assistance.
+              </li>
+              <li>
+                <BoldText>Healing & Support Networks</BoldText> – Resources for connecting with nature and education on environment along with overall mental, physical, and emotional well-being.
+              </li>
+              <li>
+                <BoldText>Community & Physical Activities</BoldText> – Local groups for tennis, yoga, biking, running, disc golf, volleyball, jujutsu, boxing, rock climbing and more.
+              </li>
+            </List>
+          </BeneficiarySection>
+
+          <BeneficiarySection>
+            <BeneficiaryTitle>Vendors</BeneficiaryTitle>
+            <BoldText>Food Vendors</BoldText>
+            <List>
+              <li>
+                <BoldText>Sally B&apos;s Tacos</BoldText> – Available throughout the entire event.
+              </li>
+              <li>
+                <BoldText>Matu&apos;s Catering</BoldText> – Tasty kebabs (after 5PM).
+              </li>
+              <li>
+                <BoldText>Taylormade Cookies</BoldText> – Taylor&apos;s famous chocolate chip cookies.
+              </li>
+            </List>
+            <BoldText>Drink Vendors & Options</BoldText>
+            <List>
+              <li>
+                <BoldText>Standard Beverages</BoldText> – Costco bulk purchase (soda, water, etc.).
+              </li>
+              <li>
+                <BoldText>Art Night Bar</BoldText> – Expected 30% of sales revenue.
+              </li>
+            </List>
+          </BeneficiarySection>
+
           <div className="border-t border-green-200 pt-4 mt-6">
             <h5 className="text-lg font-semibold text-[#4A4433] mb-3 text-center">
               Specific Art for Sale with Donations to:
