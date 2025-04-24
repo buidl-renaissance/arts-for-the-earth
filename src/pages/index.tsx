@@ -297,9 +297,9 @@ export const metadata = {
       'A celebration of creativity and environmental awareness through art, music, and community engagement.',
     images: [
       {
-        url: '/images/arts-for-earth-banner.jpg',
+        url: '/arts-for-earth-banner.jpg',
         width: 1200,
-        height: 630,
+        height: 800,
         alt: 'Arts For The Earth',
       },
     ],
