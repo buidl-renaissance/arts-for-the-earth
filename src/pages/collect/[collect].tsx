@@ -104,7 +104,6 @@ const Header = styled.header`
   position: relative;
   z-index: 2;
   padding: 0.5rem;
-  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
