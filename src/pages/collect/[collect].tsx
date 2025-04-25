@@ -111,9 +111,9 @@ const Header = styled.header`
   align-items: center;
 
   p {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     margin-top: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: #a7f3d0;
     max-width: 90%;
   }
@@ -131,7 +131,7 @@ const Header = styled.header`
 `;
 
 const MainTitle = styled.h1`
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 900;
   margin-bottom: 0.5rem;
   font-family: var(--font-cambria);

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import { Collectible, mockCoins } from "@/mockCoins";
-
+import ProgressBar from "@/components/ProgressBar";
 const getCollectionStatus = (coinId: string) => {
   if (typeof window === "undefined") return false;
   const collectedCoins = JSON.parse(
@@ -116,6 +116,9 @@ const Collectables = () => {
           </ScrollArrow>
         )}
       </ScrollableContainer>
+
+      <ProgressBar collectibles={collectibles} getCollectionStatus={getCollectionStatus} />
+      
     </CollectablesContainer>
   );
 };
@@ -227,7 +230,7 @@ const CollectibleContent = styled.div<{ collected: boolean }>`
 
 const CollectibleImageWrapper = styled.div<{ collected: boolean }>`
   position: relative;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0rem;
 
   .collectible-image {
     border-radius: 50%;
@@ -266,3 +269,4 @@ const CollectibleStatus = styled.p`
   font-size: 0.7rem;
   color: #a7f3d0;
 `;
+

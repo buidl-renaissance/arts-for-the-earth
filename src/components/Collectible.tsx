@@ -73,8 +73,8 @@ const Collectible: React.FC<CollectibleProps> = ({
           <Image
             src={coinData.image}
             alt={coinData.title}
-            width={200}
-            height={200}
+            width={180}
+            height={180}
             className="coin-image"
           />
         </CoinWrapper>
@@ -100,8 +100,8 @@ export default Collectible;
 
 const CoinContainer = styled.div<{ interactive: boolean }>`
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,8 +113,8 @@ const CoinContainer = styled.div<{ interactive: boolean }>`
   }
 
   @media (min-width: 640px) {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
 `;
 
