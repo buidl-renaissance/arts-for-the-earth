@@ -54,6 +54,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       coinData,
+      metadata: {
+        title: coinData.title,
+        description: coinData.description,
+        image: coinData.image,
+      },
     },
   };
 };

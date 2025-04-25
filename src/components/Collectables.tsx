@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useRef, useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { mockCoins } from "@/mockCoins";
+import { Collectible, mockCoins } from "@/mockCoins";
 
 const getCollectionStatus = (coinId: string) => {
   if (typeof window === "undefined") return false;
@@ -16,6 +18,17 @@ const Collectables = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
+
+  useEffect(() => {
+    const collectibles = Object.values(mockCoins).map((coin) => ({
+      id: coin.id,
+      title: coin.title,
+      image: coin.image,
+      description: coin.description,
+    }));
+    setCollectibles(collectibles);
+  }, []);
 
   const handleScroll = () => {
     if (!scrollContainerRef.current) return;
@@ -60,40 +73,42 @@ const Collectables = () => {
           </ScrollArrow>
         )}
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <CollectablesScroll ref={scrollContainerRef}>
-            {Object.values(mockCoins).map((collectible) => (
-              <CollectibleItem key={collectible.id}>
-                <Link href={`/collect/${collectible.id}`}>
-                  <CollectibleContent
+        <CollectablesScroll ref={scrollContainerRef}>
+          {collectibles.map((collectible) => (
+            <CollectibleItem key={collectible.id}>
+              <Link href={`/collect/${collectible.id}`}>
+                <CollectibleContent
+                  collected={getCollectionStatus(collectible.id)}
+                >
+                  <CollectibleImageWrapper
                     collected={getCollectionStatus(collectible.id)}
                   >
-                    <CollectibleImageWrapper
-                      collected={getCollectionStatus(collectible.id)}
-                    >
-                      <Image
-                        src={collectible.image}
-                        alt={collectible.title}
-                        width={90}
-                        height={90}
-                        className="collectible-image"
-                      />
+                    <Image
+                      src={collectible.image}
+                      alt={collectible.title}
+                      width={90}
+                      height={90}
+                      className="collectible-image"
+                    />
+                    <Suspense fallback={<div>Loading...</div>}>
                       {getCollectionStatus(collectible.id) && (
                         <CollectedBadge>✓</CollectedBadge>
                       )}
-                    </CollectibleImageWrapper>
-                    <CollectibleName>{collectible.title}</CollectibleName>
+                    </Suspense>
+                  </CollectibleImageWrapper>
+                  <CollectibleName>{collectible.title}</CollectibleName>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <CollectibleStatus>
                       {getCollectionStatus(collectible.id)
                         ? "Collected"
                         : "Tap to collect"}
                     </CollectibleStatus>
-                  </CollectibleContent>
-                </Link>
-              </CollectibleItem>
-            ))}
-          </CollectablesScroll>
-        </Suspense>
+                  </Suspense>
+                </CollectibleContent>
+              </Link>
+            </CollectibleItem>
+          ))}
+        </CollectablesScroll>
 
         {showRightArrow && (
           <ScrollArrow direction="right" onClick={scrollRight}>

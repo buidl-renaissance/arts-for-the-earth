@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
@@ -31,6 +31,10 @@ const Collectible: React.FC<CollectibleProps> = ({
       setIsCollected(true);
       setIsFadedOut(false);
       setIsGlowing(true);
+    } else {
+      setIsCollected(false);
+      setIsFadedOut(true);
+      setIsGlowing(false);
     }
   }, [coinData.id]);
 
@@ -58,7 +62,7 @@ const Collectible: React.FC<CollectibleProps> = ({
   };
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <CoinContainer onClick={handleCollect} interactive={!isCollected}>
         <CoinWrapper
           spinning={isSpinning}
@@ -88,7 +92,7 @@ const Collectible: React.FC<CollectibleProps> = ({
       </CollectionStatus>
 
       {onBack && <BackButton onClick={onBack}>Back to Collection</BackButton>}
-    </>
+    </Suspense>
   );
 };
 
