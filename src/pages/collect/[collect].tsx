@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
@@ -15,17 +15,15 @@ type CoinData = {
 
 type CollectPageProps = {
   coinData: CoinData;
+  uniqueId: string;
 };
 
-const CollectPage = ({ coinData }: CollectPageProps) => {
+const CollectPage = ({ coinData, uniqueId }: CollectPageProps) => {
   return (
     <Container>
       <Head>
         <title>{coinData.title} | Earth Day Detroit</title>
-        <meta
-          name="description"
-          content={coinData.description}
-        />
+        <meta name="description" content={coinData.description} />
       </Head>
 
       <BackgroundGradient />
@@ -36,8 +34,8 @@ const CollectPage = ({ coinData }: CollectPageProps) => {
           <p>{coinData.description}</p>
         </Header>
 
-        <Collectible coinData={coinData} />
-        
+        <Collectible coinData={coinData} uniqueId={uniqueId} />
+
         <Collectables />
       </Content>
     </Container>
@@ -46,13 +44,48 @@ const CollectPage = ({ coinData }: CollectPageProps) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { collect } = context.params || {};
-  const coinId = typeof collect === 'string' ? collect : '';
-  
+  const coinId = typeof collect === "string" ? collect : "";
+
   // Get coin data from mock data
-  const coinData = mockCoins[coinId as keyof typeof mockCoins] || mockCoins["earth-day"]; // Default to earth-day if not found
-  
+  const coinData =
+    mockCoins[coinId as keyof typeof mockCoins] || mockCoins["earth-day"]; // Default to earth-day if not found
+
+  // Generate a unique ID for this collection instance
+  let uniqueId = "";
+  const { req, res } = context;
+
+  // Check if uniqueId cookie exists
+  const existingUniqueId = req.cookies[`collect-${coinId}`];
+
+  if (existingUniqueId) {
+    uniqueId = existingUniqueId;
+  } else if (context.query.key === "earth") {
+    // Generate a new unique ID
+    uniqueId = `${coinId}-${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2, 9)}`;
+
+    // Set the cookie with the unique ID
+    // Expires in 30 days
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+
+    res.setHeader(
+      "Set-Cookie",
+      `collect-${coinId}=${uniqueId}; Path=/; Expires=${expirationDate.toUTCString()}; HttpOnly`
+    );
+
+    return {
+      redirect: {
+        destination: `/collect/${coinId}`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
+      uniqueId,
       coinData,
       metadata: {
         title: coinData.title,

@@ -10,11 +10,13 @@ interface CoinData {
 
 interface CollectibleProps {
   coinData: CoinData;
+  uniqueId: string;
   onBack?: () => void;
 }
 
 const Collectible: React.FC<CollectibleProps> = ({
   coinData,
+  uniqueId,
   onBack,
 }) => {
   const [isCollected, setIsCollected] = useState(false);
@@ -36,34 +38,60 @@ const Collectible: React.FC<CollectibleProps> = ({
       setIsFadedOut(true);
       setIsGlowing(false);
     }
+
+    if (uniqueId) {
+      if (isCollected) return;
+
+      setIsSpinning(true);
+      setIsFadedOut(false);
+
+      // Spin for 3 seconds before showing collected state
+      setTimeout(() => {
+        setIsSpinning(false);
+        setIsCollected(true);
+        setIsGlowing(true);
+
+        // Save to localStorage
+        const collectedCoins = JSON.parse(
+          localStorage.getItem("collectedCoins") || "[]"
+        );
+        if (!collectedCoins.includes(coinData.id)) {
+          collectedCoins.push(coinData.id);
+          localStorage.setItem(
+            "collectedCoins",
+            JSON.stringify(collectedCoins)
+          );
+        }
+      }, 3000);
+    }
   }, [coinData.id]);
 
-  const handleCollect = () => {
-    if (isCollected) return;
+  //   const handleCollect = () => {
+  //     if (isCollected) return;
 
-    setIsSpinning(true);
-    setIsFadedOut(false);
+  //     setIsSpinning(true);
+  //     setIsFadedOut(false);
 
-    // Spin for 3 seconds before showing collected state
-    setTimeout(() => {
-      setIsSpinning(false);
-      setIsCollected(true);
-      setIsGlowing(true);
+  //     // Spin for 3 seconds before showing collected state
+  //     setTimeout(() => {
+  //       setIsSpinning(false);
+  //       setIsCollected(true);
+  //       setIsGlowing(true);
 
-      // Save to localStorage
-      const collectedCoins = JSON.parse(
-        localStorage.getItem("collectedCoins") || "[]"
-      );
-      if (!collectedCoins.includes(coinData.id)) {
-        collectedCoins.push(coinData.id);
-        localStorage.setItem("collectedCoins", JSON.stringify(collectedCoins));
-      }
-    }, 3000);
-  };
+  //       // Save to localStorage
+  //       const collectedCoins = JSON.parse(
+  //         localStorage.getItem("collectedCoins") || "[]"
+  //       );
+  //       if (!collectedCoins.includes(coinData.id)) {
+  //         collectedCoins.push(coinData.id);
+  //         localStorage.setItem("collectedCoins", JSON.stringify(collectedCoins));
+  //       }
+  //     }, 3000);
+  //   };
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <CoinContainer onClick={handleCollect} interactive={!isCollected}>
+      <CoinContainer interactive={!isCollected}>
         <CoinWrapper
           spinning={isSpinning}
           collected={isCollected}
@@ -87,7 +115,7 @@ const Collectible: React.FC<CollectibleProps> = ({
             <span>✓</span> Coin Collected!
           </CollectedMessage>
         ) : (
-          <CollectPrompt>Tap the coin to collect</CollectPrompt>
+          <CollectPrompt>Find the earth to collect</CollectPrompt>
         )}
       </CollectionStatus>
 
@@ -154,14 +182,24 @@ const CoinWrapper = styled.div<{
   }
 
   @keyframes spin {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
+    0% {
+      transform: rotateY(0deg);
+    }
+    100% {
+      transform: rotateY(360deg);
+    }
   }
 
   @keyframes collect {
-    0% { transform: scale(1) rotateY(0deg); }
-    50% { transform: scale(1.2) rotateY(180deg); }
-    100% { transform: scale(1) rotateY(360deg); }
+    0% {
+      transform: scale(1) rotateY(0deg);
+    }
+    50% {
+      transform: scale(1.2) rotateY(180deg);
+    }
+    100% {
+      transform: scale(1) rotateY(360deg);
+    }
   }
 `;
 
@@ -182,16 +220,31 @@ const GlowEffect = styled.div<{ active: boolean }>`
   z-index: -1;
   opacity: ${(props) => (props.active ? 1 : 0)};
   transition: opacity 0.5s ease, background 0.5s ease;
-  animation: ${(props) => props.active ? "enhancedPulse 3s infinite ease-in-out" : "none"};
+  animation: ${(props) =>
+    props.active ? "enhancedPulse 3s infinite ease-in-out" : "none"};
 
   @keyframes pulse {
-    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
-    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
   }
 
   @keyframes enhancedPulse {
-    0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.9); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    0%,
+    100% {
+      opacity: 0.7;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
   }
 `;
 
@@ -206,8 +259,13 @@ const CollectPrompt = styled.p`
   animation: fadeInOut 2s infinite ease-in-out;
 
   @keyframes fadeInOut {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
+    0%,
+    100% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
   }
 `;
 
@@ -233,9 +291,17 @@ const CollectedMessage = styled.p`
   }
 
   @keyframes popIn {
-    0% { transform: scale(0); opacity: 0; }
-    70% { transform: scale(1.2); }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    70% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 `;
 
