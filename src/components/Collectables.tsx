@@ -97,13 +97,13 @@ const Collectables = () => {
                     </Suspense>
                   </CollectibleImageWrapper>
                   <CollectibleName>{collectible.title}</CollectibleName>
-                  <Suspense fallback={<div>Loading...</div>}>
+                  {/* <Suspense fallback={<div>Loading...</div>}>
                     <CollectibleStatus>
                       {getCollectionStatus(collectible.id)
                         ? "Collected"
                         : "Tap to collect"}
                     </CollectibleStatus>
-                  </Suspense>
+                  </Suspense> */}
                 </CollectibleContent>
               </Link>
             </CollectibleItem>
@@ -260,13 +260,13 @@ const CollectedBadge = styled.div`
 const CollectibleName = styled.h3`
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  margin: 0.2rem 0;
   color: #d4fc79;
   text-align: center;
 `;
 
-const CollectibleStatus = styled.p`
-  font-size: 0.7rem;
-  color: #a7f3d0;
-`;
+// const CollectibleStatus = styled.p`
+//   font-size: 0.7rem;
+//   color: #a7f3d0;
+// `;
 
