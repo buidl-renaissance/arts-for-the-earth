@@ -1,7 +1,9 @@
 import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-
+import { getOrCreateWallet } from "@/utils/wallet";
+// import { Ed25519Keypair } from "@mysten/sui.js/keypairs/ed25519";
+// import { getCollectibleSponsoredTx } from "@/utils/collect";
 interface CoinData {
   id: string;
   title: string;
@@ -23,6 +25,73 @@ const Collectible: React.FC<CollectibleProps> = ({
   const [isSpinning, setIsSpinning] = useState(false);
   const [isFadedOut, setIsFadedOut] = useState(true);
   const [isGlowing, setIsGlowing] = useState(false);
+  // const [wallet, setWallet] = useState<Ed25519Keypair | null>(null);
+  // const [signedTx, setSignedTx] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMint = async () => {
+      const wallet = getOrCreateWallet();
+      if (!wallet) return;
+      const response = await fetch(`/api/collect/mint?coinId=${coinData.id}&userAddress=${wallet.getPublicKey().toSuiAddress()}`)
+      const data = await response.json();
+      console.log(data);
+      alert("Minted");
+    };
+    fetchMint();
+  }, []);
+  
+  // useEffect(() => {
+  //   const executeTx = async () => {
+  //     const wallet = getOrCreateWallet();
+  //     if (!wallet) return;
+
+  //     try {
+  //       // Execute the sponsored transaction
+  //       // The signedTx should already be properly serialized and signed
+  //       const client = getSuiClient();
+        
+  //       // Use the provided signedTx directly instead of trying to deserialize and re-sign
+  //       const result = await client.executeTransactionBlock({
+  //         transactionBlock: signedTx.bytes,
+  //         signature: signedTx.signature,
+  //       });
+
+  //       console.log("Transaction executed:", result);
+        
+  //       // // Store the collected coin in localStorage
+  //       // const collectedCoins = JSON.parse(
+  //       //   localStorage.getItem("collectedCoins") || "[]"
+  //       // );
+  //       // if (!collectedCoins.includes(coinData.id)) {
+  //       //   collectedCoins.push(coinData.id);
+  //       //   localStorage.setItem("collectedCoins", JSON.stringify(collectedCoins));
+  //       // }
+  //     } catch (error) {
+  //       console.error("Error executing transaction:", error);
+  //     }
+  //   };
+
+  //   if (signedTx) {
+  //     executeTx();
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   const fetchSignedTx = async () => {
+  //     const response = await fetch("/api/collect", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         coinId: coinData.id,
+  //         address: wallet?.getPublicKey().toSuiAddress(),
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     setSignedTx(data.signedTx);
+  //   };
+  //   if (!signedTx) {
+  //     fetchSignedTx();
+  //   }
+  // }, [signedTx, wallet, coinData.id]);
 
   useEffect(() => {
     // Check if this coin was already collected in localStorage

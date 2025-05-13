@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { mockCoins } from "@/mockCoins";
 import Collectables from "@/components/Collectables";
 import Collectible from "@/components/Collectible";
+import { getOrCreateWallet } from "@/utils/wallet";
+import { Ed25519Keypair } from "@mysten/sui.js/keypairs/ed25519";
+// import { generatePrivateKey } from "@/utils/sponsor";
 
 type CoinData = {
   id: string;
@@ -19,6 +22,12 @@ type CollectPageProps = {
 };
 
 const CollectPage = ({ coinData, uniqueId }: CollectPageProps) => {
+  const [wallet, setWallet] = useState<Ed25519Keypair | null>(null);
+  useEffect(() => {
+    setWallet(getOrCreateWallet());
+    // console.log("signedTx:", signedTx);
+    // console.log("private key:", generatePrivateKey());
+  }, []);
   return (
     <Container>
       <Head>
@@ -32,6 +41,7 @@ const CollectPage = ({ coinData, uniqueId }: CollectPageProps) => {
         <Header>
           <MainTitle>{coinData.title}</MainTitle>
           <p>{coinData.description}</p>
+          <p>{wallet?.getPublicKey().toSuiAddress()}</p>
         </Header>
 
         <Collectible coinData={coinData} uniqueId={uniqueId} />
@@ -51,19 +61,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     mockCoins[coinId as keyof typeof mockCoins] || mockCoins["earth-day"]; // Default to earth-day if not found
 
   // Generate a unique ID for this collection instance
-  let uniqueId = "";
   const { req, res } = context;
 
-  // Check if uniqueId cookie exists
-  const existingUniqueId = req.cookies[`collect-${coinId}`];
+  // Check if signedTx cookie exists
+  const existingId = req.cookies[`mint-${coinId}`];
 
-  if (existingUniqueId) {
-    uniqueId = existingUniqueId;
+  if (existingId) {
+    if (context.query.key === "earth") {
+      return {
+        redirect: {
+          destination: `/collect/${coinId}`,
+          permanent: false,
+        },
+      };
+    }
   } else if (context.query.key === "earth") {
+    
     // Generate a new unique ID
-    uniqueId = `${coinId}-${Date.now()}-${Math.random()
-      .toString(36)
-      .substring(2, 9)}`;
+    const uniqueId = crypto.randomUUID();
 
     // Set the cookie with the unique ID
     // Expires in 30 days
@@ -72,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     res.setHeader(
       "Set-Cookie",
-      `collect-${coinId}=${uniqueId}; Path=/; Expires=${expirationDate.toUTCString()}; HttpOnly`
+      `mint-${coinId}=${uniqueId}; Path=/; Expires=${expirationDate.toUTCString()}; HttpOnly`
     );
 
     return {
@@ -85,7 +100,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      uniqueId,
+      uniqueId: existingId ?? undefined,
       coinData,
       metadata: {
         title: coinData.title,
