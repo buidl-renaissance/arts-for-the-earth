@@ -695,7 +695,7 @@ export default function Home() {
                 <BeneficiaryCardText>
                   • <BoldText>Contact Chloe White</BoldText> – Organization
                   focused on providing resources for affordable living, food
-                  assistance, and survival support for underserved communities.
+                  assistance, and survival support for under-served communities.
                 </BeneficiaryCardText>
               </BeneficiaryCard>
 

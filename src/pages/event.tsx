@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const Container = styled.div`
   display: grid;
@@ -305,7 +306,61 @@ const ImageCaption = styled(Paragraph)`
   color: #5d5a44;
 `;
 
+const FormMessage = styled.div<{ type: 'success' | 'error' }>`
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+  width: 100%;
+  background-color: ${props => props.type === 'success' ? '#dcfce7' : '#fee2e2'};
+  color: ${props => props.type === 'success' ? '#166534' : '#dc2626'};
+  border: 1px solid ${props => props.type === 'success' ? '#86efac' : '#fecaca'};
+  font-family: var(--font-cambria);
+`;
+
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+
+      setStatus({
+        type: 'success',
+        message: data.message || 'Thank you for subscribing!'
+      });
+      setEmail('');
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Something went wrong. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Container>
       <Header>
@@ -419,18 +474,26 @@ export default function Home() {
 
       <Footer>
         <p>Thank you for being part of our journey to celebrate and protect our Earth</p>
-        <EmailForm onSubmit={(e) => e.preventDefault()}>
+        <EmailForm onSubmit={handleSubmit}>
           <FormTitle>Stay Connected</FormTitle>
           <FormDescription>
             Join our mailing list to be notified about next year&apos;s Arts for the Earth event
           </FormDescription>
+          {status.type && (
+            <FormMessage type={status.type}>
+              {status.message}
+            </FormMessage>
+          )}
           <EmailInput
             type="email"
             placeholder="Enter your email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={isSubmitting}
           />
-          <SubmitButton type="submit">
-            Subscribe
+          <SubmitButton type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
           </SubmitButton>
         </EmailForm>
       </Footer>
