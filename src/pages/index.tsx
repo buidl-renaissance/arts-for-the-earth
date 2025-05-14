@@ -106,20 +106,19 @@ const MainTitle = styled.h1`
   background: linear-gradient(to right, #d4fc79 0%, #96e6a1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6),
-    0 0 20px rgba(212, 252, 121, 0.4);
-  animation: glow 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 10px rgba(212, 252, 121, 0.3);
+  animation: glowFade 3s ease-in-out infinite alternate;
   line-height: 1.1;
   box-shadow: none !important;
 
   @keyframes glowFade {
     from {
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.6),
-        0 0 20px rgba(212, 252, 121, 0.4);
+      opacity: 0.65;
+      text-shadow: 0 0 10px rgba(212, 252, 121, 0.3);
     }
     to {
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.7),
-        0 0 30px rgba(212, 252, 121, 0.5), 0 0 40px rgba(150, 230, 161, 0.3);
+      opacity: 1;
+      text-shadow: 0 0 15px rgba(212, 252, 121, 0.4);
     }
   }
 

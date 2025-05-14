@@ -39,16 +39,18 @@ const MainTitle = styled.h1`
   background: linear-gradient(to right, #d4fc79 0%, #96e6a1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: glow 3s ease-in-out infinite alternate;
+  animation: glowFade 3s ease-in-out infinite alternate;
   line-height: 1.1;
   box-shadow: none !important;
 
-  @keyframes glow {
+  @keyframes glowFade {
     from {
-      opacity: 0.9;
+      opacity: 0.65;
+      text-shadow: 0 0 10px rgba(212, 252, 121, 0.3);
     }
     to {
       opacity: 1;
+      text-shadow: 0 0 15px rgba(212, 252, 121, 0.4);
     }
   }
 
@@ -394,7 +396,7 @@ const FloatingParticle = styled.div`
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.8;
+  opacity: 0.5;
   box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.5);
   animation: float 15s infinite ease-in-out, glow 3s infinite ease-in-out;
 
