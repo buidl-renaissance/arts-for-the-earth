@@ -1,8 +1,6 @@
 'use client';
 
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import BuyButton from '../components/BuyButton';
 import Link from 'next/link';
 
 const PageContainer = styled.div`
@@ -26,7 +24,7 @@ const FloatingParticle = styled.div`
   z-index: 1;
   opacity: 0.6;
   box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
-  animation: float 15s infinite ease-in-out;
+  animation: float 15s infinite ease-in-out, glow 3s infinite ease-in-out;
 
   @keyframes float {
     0%,
@@ -41,6 +39,17 @@ const FloatingParticle = styled.div`
     }
     75% {
       transform: translate(20px, -15px);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      opacity: 0.4;
+      box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      opacity: 0.8;
+      box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.4);
     }
   }
 `;
@@ -308,48 +317,25 @@ export const metadata = {
 };
 
 export default function Home() {
-  const [particles, setParticles] = useState<
-    Array<{
-      id: number;
-      top: string;
-      left: string;
-      size: string;
-      animationDuration: string;
-      animationDelay: string;
-    }>
-  >([]);
-
-  useEffect(() => {
-    const particleCount = window.innerWidth < 768 ? 8 : 30;
-    const newParticles = [];
-
-    for (let i = 0; i < particleCount; i++) {
-      newParticles.push({
-        id: i,
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        size: `${Math.random() * 3 + 2}px`,
-        animationDuration: `${Math.random() * 20 + 10}s`,
-        animationDelay: `${Math.random() * 5}s`,
-      });
-    }
-
-    setParticles(newParticles);
-  }, []);
+  // Create an array of positions for the fireflies
+  const fireflies = Array.from({ length: 25 }, (_, i) => ({
+    id: i,
+    style: {
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 15}s`,
+      animationDuration: `${15 + Math.random() * 10}s`,
+      animation: `float ${15 + Math.random() * 10}s infinite ease-in-out ${Math.random() * 15}s, 
+                 glow ${2 + Math.random() * 2}s infinite ease-in-out ${Math.random() * 2}s`,
+    },
+  }));
 
   return (
     <PageContainer>
-      {particles.map((particle) => (
+      {fireflies.map((firefly) => (
         <FloatingParticle
-          key={particle.id}
-          style={{
-            top: particle.top,
-            left: particle.left,
-            width: particle.size,
-            height: particle.size,
-            animationDuration: particle.animationDuration,
-            animationDelay: particle.animationDelay,
-          }}
+          key={firefly.id}
+          style={firefly.style}
         />
       ))}
       <Header>
