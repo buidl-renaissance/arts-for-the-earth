@@ -113,7 +113,7 @@ const MainTitle = styled.h1`
 
   @keyframes glowFade {
     from {
-      opacity: 0.65;
+      opacity: 0.5;
       text-shadow: 0 0 10px rgba(212, 252, 121, 0.3);
     }
     to {
