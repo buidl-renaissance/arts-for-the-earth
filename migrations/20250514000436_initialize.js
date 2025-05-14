@@ -22,3 +22,16 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema.dropTable('email_captures');
 };
+
+/**
+ * MySQL equivalent of the above migration would be:
+  CREATE TABLE `email_captures` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `email` varchar(255) NOT NULL,
+    `form_id` varchar(255) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `email_form_id_unique` (`email`, `form_id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ */
