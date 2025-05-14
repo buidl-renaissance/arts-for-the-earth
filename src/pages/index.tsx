@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import Link from 'next/link';
+import BuyButton from '../components/BuyButton';
 
 const PageContainer = styled.div`
   display: grid;
@@ -96,7 +97,7 @@ const Header = styled.header`
 `;
 
 const MainTitle = styled.h1`
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 900;
   margin-bottom: 0.5rem;
   font-family: var(--font-cambria);
@@ -109,6 +110,7 @@ const MainTitle = styled.h1`
     0 0 20px rgba(212, 252, 121, 0.4);
   animation: glow 3s ease-in-out infinite alternate;
   line-height: 1.1;
+  box-shadow: none !important;
 
   @keyframes glowFade {
     from {
