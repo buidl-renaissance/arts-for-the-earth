@@ -390,12 +390,12 @@ const FloatingParticle = styled.div`
   position: absolute;
   width: 5px;
   height: 5px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.6;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
+  opacity: 0.8;
+  box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.5);
   animation: float 15s infinite ease-in-out, glow 3s infinite ease-in-out;
 
   @keyframes float {
@@ -416,12 +416,12 @@ const FloatingParticle = styled.div`
 
   @keyframes glow {
     0%, 100% {
-      opacity: 0.4;
-      box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2);
+      opacity: 0.2;
+      box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
     }
     50% {
-      opacity: 0.8;
-      box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.4);
+      opacity: 0.9;
+      box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.7);
     }
   }
 `;
